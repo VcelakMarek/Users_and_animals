@@ -19,7 +19,7 @@ const UserList = () => {
           <h2>There are {userList.length} users</h2>
         </div>
         <div className="flex gap-10">
-          <Button color="purple" link={`/list/newUser`}>
+          <Button color="purple" link="new">
             Add User
           </Button>
         </div>

@@ -18,7 +18,7 @@ const AnimalList = () => {
           <h2>There are {animalList.length} animals</h2>
         </div>
         <div className="flex gap-10">
-          <Button color="purple" link={`/list/newAnimal`}>
+          <Button color="purple" link="new">
             Add Animal
           </Button>
         </div>

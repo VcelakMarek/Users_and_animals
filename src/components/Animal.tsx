@@ -17,7 +17,7 @@ const Animal = ({ animalData }: AnimalProps) => {
       <h3 className="basis-1/12">{animalData.age}</h3>
 
       <div className="flex basis-2/12 items-center gap-4">
-        <Button color="grey" link={`/Animals/edit/${animalData.id}`}>
+        <Button color="grey" link={`edit/${animalData.id}`}>
           Edit
         </Button>
         <Button color="red" onClick={handleDelete}>

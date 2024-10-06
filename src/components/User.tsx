@@ -19,7 +19,7 @@ const User = ({ userData }: Props) => {
       <AccessStatus isBanned={userData.banned} />
 
       <div className="flex basis-2/12 items-center gap-4">
-        <Button color="grey" link={`/list/edit/${userData.id}`}>
+        <Button color="grey" link={`edit/${userData.id}`}>
           Edit
         </Button>
         <Button color="red" onClick={handleDelete}>
