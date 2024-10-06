@@ -1,12 +1,12 @@
 import Animal from "components/Animal";
 import Button from "components/Button";
 import { getAnimals } from "api/AnimalApi";
-import type { Animal as AnimalType } from "types/AnimalType";
 
-const Animals = () => {
+const AnimalList = () => {
   const { animalList } = getAnimals();
-  if (!animalList) {
-    return null;
+
+  if (!animalList || !animalList.length) {
+    return <p>List is empty</p>;
   }
   console.log(animalList);
 
@@ -24,16 +24,12 @@ const Animals = () => {
         </div>
       </header>
       <div className="mt-16 grid place-items-center">
-        {Array.isArray(animalList) && animalList.length > 0 ? (
-          animalList.map((animalData: AnimalType) => (
-            <Animal animalData={animalData} key={animalData.id} />
-          ))
-        ) : (
-          <p>List is empty</p>
-        )}
+        {animalList.map((animalData) => (
+          <Animal animalData={animalData} key={animalData.id} />
+        ))}
       </div>
     </>
   );
 };
 
-export default Animals;
+export default AnimalList;

@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UsersAndAnimals from "components/UsersAndAnimals";
 import UserList from "components/UserList";
+import AnimalList from "components/AnimalList";
 import NewUser from "components/NewUser";
-import Animals from "components/Animals";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -24,7 +24,10 @@ const App = () => {
             <Route path="/Users_and_animals/" element={<UsersAndAnimals />} />
             <Route path="/Users_and_animals/users/" element={<UserList />} />
             <Route path="/users/new" element={<NewUser />} />
-            <Route path="/Users_and_animals/animals/" element={<Animals />} />
+            <Route
+              path="/Users_and_animals/animals/"
+              element={<AnimalList />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
