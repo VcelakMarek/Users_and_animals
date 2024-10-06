@@ -1,12 +1,12 @@
 import User from "components/User";
 import Button from "components/Button";
 import { getUsers } from "api/UserApi";
-import type { User as UserType } from "types/UserType";
 
-const Users = () => {
+const UserList = () => {
   const { userList } = getUsers();
-  if (!userList) {
-    return null;
+
+  if (!userList || !userList.length) {
+    return <p>List is empty</p>;
   }
 
   console.log(userList);
@@ -25,16 +25,12 @@ const Users = () => {
         </div>
       </header>
       <div className="mt-16 grid place-items-center">
-        {Array.isArray(userList) && userList.length > 0 ? (
-          userList.map((userData: UserType) => (
-            <User userData={userData} key={userData.id} />
-          ))
-        ) : (
-          <p>List is empty</p>
-        )}
+        {userList.map((userData) => (
+          <User userData={userData} key={userData.id} />
+        ))}
       </div>
     </>
   );
 };
 
-export default Users;
+export default UserList;
