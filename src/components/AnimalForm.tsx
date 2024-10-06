@@ -47,7 +47,7 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
                   <FormInput
                     id="type"
                     inputName="Type"
-                    size="medium"
+                    size="small"
                     inputType="select"
                     selectValues={["Cat", "Dog", "Others"]}
                   />
@@ -55,7 +55,7 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
                   <FormInput
                     id="age"
                     inputName="Age"
-                    size="medium"
+                    size="small"
                     inputType="number"
                   />
                 </div>

@@ -48,7 +48,7 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                   <FormInput
                     id="gender"
                     inputName="Gender"
-                    size="medium"
+                    size="small"
                     inputType="select"
                     selectValues={["male", "female", "other"]}
                   />
@@ -56,7 +56,7 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                   <FormInput
                     id="banned"
                     inputName="Banned"
-                    size="medium"
+                    size="small"
                     inputType="select"
                     selectValues={["true", "false"]}
                   />
