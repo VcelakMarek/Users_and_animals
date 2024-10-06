@@ -12,7 +12,7 @@ type Props = {
 };
 
 const inputSize: { [key in Size]: string } = {
-  small: "w-[120px]",
+  small: "w-[240px]",
   large: "md:w-[250px] w-[504px]",
 };
 
