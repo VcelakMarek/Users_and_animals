@@ -5,6 +5,9 @@ import UsersAndAnimals from "components/UsersAndAnimals";
 import UserList from "components/UserList";
 import AnimalList from "components/AnimalList";
 import NewUser from "components/NewUser";
+import NewAnimal from "components/NewAnimal";
+import EditUser from "components/EditUser";
+import EditAnimal from "components/EditAnimal";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -23,10 +26,22 @@ const App = () => {
           <Routes>
             <Route path="/Users_and_animals/" element={<UsersAndAnimals />} />
             <Route path="/Users_and_animals/users/" element={<UserList />} />
-            <Route path="/users/new" element={<NewUser />} />
+            <Route path="/Users_and_animals/users/new" element={<NewUser />} />
+            <Route
+              path="/Users_and_animals/users/edit/:id"
+              element={<EditUser />}
+            />
             <Route
               path="/Users_and_animals/animals/"
               element={<AnimalList />}
+            />
+            <Route
+              path="/Users_and_animals/animals/new"
+              element={<NewAnimal />}
+            />
+            <Route
+              path="/Users_and_animals/animals/edit/:id"
+              element={<EditAnimal />}
             />
           </Routes>
         </div>
