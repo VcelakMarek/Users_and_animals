@@ -19,3 +19,25 @@ export const getAnimals = () => {
 
   return { animalList, isFetching, refetch, error };
 };
+
+export const getAnimal = (id: string) => {
+  const {
+    data: response,
+    isFetching,
+    refetch,
+    error,
+  } = useQuery({
+    queryKey: ["Animal"],
+    queryFn: () => GET<Animal>(`${url}/${id}`),
+    staleTime: 0, // Disable caching (always considered stale)
+    refetchOnWindowFocus: false, // Avoid refetching when window regains focus
+  });
+
+  const animalData = response ? response.data : null;
+
+  return { animalData, isFetching, refetch, error };
+};
+
+export const updateAnimal = () => {};
+
+export const addAnimal = () => {};
