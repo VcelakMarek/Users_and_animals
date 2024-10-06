@@ -3,10 +3,10 @@ import Button from "components/Button";
 const UsersAndAnimals = () => {
   return (
     <>
-      <Button color="grey" link="Users">
+      <Button color="grey" link="users">
         Users
       </Button>
-      <Button color="grey" link="Animals">
+      <Button color="grey" link="animals">
         Animals
       </Button>
     </>
