@@ -1,5 +1,7 @@
+import { useMutation } from "@tanstack/react-query";
 import Button from "components/Button";
 import AccessStatus from "components/AccessStatus";
+import { deleteUser } from "api/UserApi";
 import type { User } from "types/UserType";
 
 type Props = {
@@ -7,8 +9,12 @@ type Props = {
 };
 
 const User = ({ userData }: Props) => {
+  const { mutate: deleteUserMutate } = useMutation({
+    mutationFn: deleteUser,
+  });
+
   const handleDelete = () => {
-    // userDelete()
+    deleteUserMutate(userData.id);
   };
 
   return (

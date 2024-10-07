@@ -1,4 +1,6 @@
+import { useMutation } from "@tanstack/react-query";
 import Button from "components/Button";
+import { deleteAnimal } from "api/AnimalApi";
 import type { Animal } from "types/AnimalType";
 
 type AnimalProps = {
@@ -6,8 +8,12 @@ type AnimalProps = {
 };
 
 const Animal = ({ animalData }: AnimalProps) => {
+  const { mutate: deleteAnimalMutate } = useMutation({
+    mutationFn: deleteAnimal,
+  });
+
   const handleDelete = () => {
-    // userDelete()
+    deleteAnimalMutate(animalData.id);
   };
 
   return (
