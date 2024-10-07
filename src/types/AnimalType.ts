@@ -1,6 +1,6 @@
 export type Animal = {
   id: string;
   name: string;
-  type: string;
+  type: "cat" | "dog" | "other";
   age: number;
 };
