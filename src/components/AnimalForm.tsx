@@ -1,29 +1,39 @@
 import { FC } from "react";
-import { FormApi } from "final-form";
 import { Form } from "react-final-form";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
-// import { updateAnimal, addAnimal } from "api/AnimalApi";
+import { addAnimal, editAnimal } from "api/AnimalApi";
 import type { Animal } from "types/AnimalType";
 
 type AnimalFormProps = {
-  form: FormApi<FormData>;
   formValues?: Animal;
   animalId?: string;
 };
 
 const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
   const navigate = useNavigate();
+  console.log(formValues, "VALUES");
+
+  const { mutate: addAnimalMutate } = useMutation({
+    mutationFn: addAnimal,
+  });
+
+  const { mutate: editAnimalMutate } = useMutation({
+    mutationFn: editAnimal,
+  });
 
   const onSubmit = async (values: Animal) => {
     const newAnimal: Animal = {
       ...values,
-      id: animalId ?? values.id,
+      id: animalId ?? "",
+      type: values.type ?? "cat",
     };
-    // formValues
-    //   ? await updateUser(formValues.id, values)
-    //   : await addUser(newAnimal);
+    console.log("values:", values);
+
+    if (formValues) editAnimalMutate(values);
+    else addAnimalMutate(newAnimal);
 
     navigate(-1);
 

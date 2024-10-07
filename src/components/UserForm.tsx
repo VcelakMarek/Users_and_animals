@@ -1,14 +1,13 @@
 import { FC } from "react";
-import { FormApi } from "final-form";
 import { Form } from "react-final-form";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
-// import { updateUser, addUser } from "api/UserApi";
+import { addUser, editUser } from "api/UserApi";
 import type { User } from "types/UserType";
 
 type UserFormProps = {
-  form: FormApi<FormData>;
   formValues?: User;
   userId?: string;
 };
@@ -17,14 +16,25 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
   const navigate = useNavigate();
   console.log(formValues, "VALUES");
 
+  const { mutate: addUserMutate } = useMutation({
+    mutationFn: addUser,
+  });
+
+  const { mutate: editUserMutate } = useMutation({
+    mutationFn: editUser,
+  });
+
   const onSubmit = async (values: User) => {
     const newUser: User = {
       ...values,
-      id: userId ?? values.id,
+      id: userId ?? "",
+      gender: values.gender ?? "female",
+      banned: values.banned ?? false,
     };
-    // formValues
-    //   ? await updateUser(formValues.id, values)
-    //   : await addUser(newUser);
+    console.log("values:", values);
+
+    if (formValues) editUserMutate(values);
+    else addUserMutate(newUser);
 
     navigate(-1);
 
@@ -50,7 +60,7 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                     inputName="Gender"
                     size="small"
                     inputType="select"
-                    selectValues={["male", "female", "other"]}
+                    selectValues={["female", "male", "other"]}
                   />
 
                   <FormInput
@@ -58,7 +68,7 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                     inputName="Banned"
                     size="small"
                     inputType="select"
-                    selectValues={["true", "false"]}
+                    selectValues={["false", "true"]}
                   />
                 </div>
                 <div>
