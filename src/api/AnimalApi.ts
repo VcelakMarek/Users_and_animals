@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET } from "connectors/fetch";
+import { GET, POST, PUT, DELETE } from "connectors/fetch";
 import type { Animal } from "types/AnimalType";
 
 const url = "/animals";
@@ -38,6 +38,14 @@ export const getAnimal = (id: string) => {
   return { animalData, isFetching, refetch, error };
 };
 
-export const updateAnimal = () => {};
+export const editAnimal = (animalData: Animal) => {
+  PUT(`${url}/${animalData.id}`, animalData);
+};
 
-export const addAnimal = () => {};
+export const addAnimal = (animalData: Animal) => {
+  POST(url, animalData);
+};
+
+export const deleteAnimal = (id: string) => {
+  DELETE(`${url}/${id}`);
+};
