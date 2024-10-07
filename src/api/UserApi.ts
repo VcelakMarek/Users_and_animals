@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET } from "connectors/fetch";
+import { GET, POST, PUT, DELETE } from "connectors/fetch";
 import type { User } from "types/UserType";
 
 const url = "/users";
@@ -39,6 +39,14 @@ export const getUser = (id: string) => {
   return { userData, isFetching, isLoading, refetch, error };
 };
 
-export const updateUser = () => {};
+export const editUser = (userData: User) => {
+  PUT(`${url}/${userData.id}`, userData);
+};
 
-export const addUser = () => {};
+export const addUser = (userData: User) => {
+  POST(url, userData);
+};
+
+export const deleteUser = (id: string) => {
+  DELETE(`${url}/${id}`);
+};
