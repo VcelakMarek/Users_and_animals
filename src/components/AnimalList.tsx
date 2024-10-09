@@ -3,12 +3,19 @@ import Button from "components/Button";
 import { getAnimals } from "api/AnimalApi";
 
 const AnimalList = () => {
-  const { animalList } = getAnimals();
+  const { animalList, isFetching, error } = getAnimals();
+
+  if (isFetching) {
+    return <div className="h-screen">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="h-screen">Error occured: {error.message}</div>;
+  }
 
   if (!animalList || !animalList.length) {
     return <p>List is empty</p>;
   }
-  console.log(animalList);
 
   return (
     <>

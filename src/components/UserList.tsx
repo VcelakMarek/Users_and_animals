@@ -3,13 +3,19 @@ import Button from "components/Button";
 import { getUsers } from "api/UserApi";
 
 const UserList = () => {
-  const { userList } = getUsers();
+  const { userList, isFetching, error } = getUsers();
+
+  if (isFetching) {
+    return <div className="h-screen">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="h-screen">Error occured: {error.message}</div>;
+  }
 
   if (!userList || !userList.length) {
     return <p>List is empty</p>;
   }
-
-  console.log(userList);
 
   return (
     <>
