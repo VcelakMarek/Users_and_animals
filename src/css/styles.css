@@ -27,6 +27,23 @@ select {
   @apply mb-5 mt-2.5 h-12 rounded-md border border-light-grey px-5 text-sm font-bold text-black outline-purple active:border-purple;
 }
 
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--light-grey);
+  border-radius: 14px;
+  width: 8px;
+  /* height: 112px */
+  border: 3px solid white;
+}
+
 @tailwind components;
 @tailwind utilities;
 
