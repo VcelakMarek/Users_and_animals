@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UsersAndAnimals from "components/UsersAndAnimals";
 import UserList from "components/UserList";
 import AnimalList from "components/AnimalList";
-import NewAnimal from "components/NewAnimal";
 import EditUser from "components/EditUser";
 import EditAnimal from "components/EditAnimal";
 import UserForm from "components/UserForm";
