@@ -5,10 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UsersAndAnimals from "components/UsersAndAnimals";
 import UserList from "components/UserList";
 import AnimalList from "components/AnimalList";
-import NewUser from "components/NewUser";
 import NewAnimal from "components/NewAnimal";
 import EditUser from "components/EditUser";
 import EditAnimal from "components/EditAnimal";
+import UserForm from "components/UserForm";
+import AnimalForm from "components/AnimalForm";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -27,7 +28,7 @@ const App = () => {
           <Routes>
             <Route path="/Users_and_animals/" element={<UsersAndAnimals />} />
             <Route path="/Users_and_animals/users/" element={<UserList />} />
-            <Route path="/Users_and_animals/users/new" element={<NewUser />} />
+            <Route path="/Users_and_animals/users/new" element={<UserForm />} />
             <Route
               path="/Users_and_animals/users/edit/:id"
               element={<EditUser />}
@@ -38,7 +39,7 @@ const App = () => {
             />
             <Route
               path="/Users_and_animals/animals/new"
-              element={<NewAnimal />}
+              element={<AnimalForm />}
             />
             <Route
               path="/Users_and_animals/animals/edit/:id"
