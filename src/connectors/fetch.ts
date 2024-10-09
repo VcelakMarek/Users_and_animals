@@ -1,6 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import type { User } from "types/UserType";
-import type { Animal } from "types/AnimalType";
 
 const BASE_URL = "https://inqool-interview-api.vercel.app/api";
 
@@ -10,16 +8,16 @@ export const GET = async <T>(url: string): Promise<AxiosResponse<T>> => {
 
 export const POST = async <T>(
   url: string,
-  data: User | Animal,
+  data: T,
 ): Promise<AxiosResponse<T>> => {
   return axios({ method: "POST", baseURL: BASE_URL, url, data });
 };
 
-export const PUT = async <T>(
+export const PATCH = async <T>(
   url: string,
-  data: Partial<User | Animal>,
+  data: Partial<T>,
 ): Promise<AxiosResponse<T>> => {
-  return axios({ method: "PUT", baseURL: BASE_URL, url, data });
+  return axios({ method: "PATCH", baseURL: BASE_URL, url, data });
 };
 
 export const DELETE = async <T>(url: string): Promise<AxiosResponse<T>> => {
