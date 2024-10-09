@@ -2,13 +2,20 @@ import { Field } from "react-final-form";
 
 type Size = "small" | "large";
 
+type Option = {
+  value: string;
+  label: string;
+};
+
 type Props = {
   id: string;
   size?: Size;
   inputName?: string;
   inputType?: "text" | "number" | "select";
   inputPlaceholder?: string;
-  selectValues?: string[];
+  selectValues?: Option[];
+  minValue?: number;
+  initialValue?: string;
 };
 
 const inputSize: { [key in Size]: string } = {
@@ -23,15 +30,23 @@ const FormInput = ({
   inputType = "text",
   inputPlaceholder,
   selectValues,
+  minValue,
+  initialValue,
 }: Props) => {
   if (inputType === "select") {
     return (
       <label htmlFor={id}>
         <h2>{inputName}</h2>
-        <Field id={id} name={id} component="select" className={inputSize[size]}>
-          {selectValues?.map((value) => (
-            <option value={value} key={value}>
-              {value}
+        <Field
+          id={id}
+          name={id}
+          component="select"
+          className={inputSize[size]}
+          initialValue={initialValue}
+        >
+          {selectValues?.map((option) => (
+            <option value={option.value} key={option.value}>
+              {option.label}
             </option>
           ))}
         </Field>
@@ -50,6 +65,7 @@ const FormInput = ({
             <input
               {...input}
               type={inputType}
+              min={minValue}
               className={`${inputSize[size]} `}
               placeholder={inputPlaceholder}
               onChange={(e) => {
