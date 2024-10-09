@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import Button from "components/Button";
 import { deleteAnimal } from "api/AnimalApi";
 import type { Animal } from "types/AnimalType";
@@ -8,12 +8,17 @@ type AnimalProps = {
 };
 
 const Animal = ({ animalData }: AnimalProps) => {
-  const { mutate: deleteAnimalMutate } = useMutation({
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: deleteAnimalMutate } = useMutation({
     mutationFn: deleteAnimal,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Animals"] });
+    },
   });
 
-  const handleDelete = () => {
-    deleteAnimalMutate(animalData.id);
+  const handleDelete = async () => {
+    await deleteAnimalMutate(animalData.id);
   };
 
   return (

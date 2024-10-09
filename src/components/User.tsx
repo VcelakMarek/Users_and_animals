@@ -1,20 +1,25 @@
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import Button from "components/Button";
 import AccessStatus from "components/AccessStatus";
 import { deleteUser } from "api/UserApi";
 import type { User } from "types/UserType";
 
-type Props = {
+type UserProps = {
   userData: User;
 };
 
-const User = ({ userData }: Props) => {
-  const { mutate: deleteUserMutate } = useMutation({
+const User = ({ userData }: UserProps) => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: deleteUserMutate } = useMutation({
     mutationFn: deleteUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Users"] });
+    },
   });
 
-  const handleDelete = () => {
-    deleteUserMutate(userData.id);
+  const handleDelete = async () => {
+    await deleteUserMutate(userData.id);
   };
 
   return (
