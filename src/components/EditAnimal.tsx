@@ -13,16 +13,14 @@ const EditAnimal = () => {
 
   if (isFetching) {
     return (
-      <>
-        <div className="flex h-screen items-center justify-center">
-          <div className="h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-purple" />
-        </div>
-      </>
+      <div className="flex h-screen items-center justify-center">
+        <div className="h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-purple" />
+      </div>
     );
   }
 
   if (!animalData) {
-    return <p>Animal doesn`t exist</p>;
+    return <p>Animal doesn&apos;t exist</p>;
   }
   //error handling
 
