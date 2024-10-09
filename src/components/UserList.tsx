@@ -19,7 +19,7 @@ const UserList = () => {
 
   return (
     <>
-      <header className="w-800px mt-16 flex h-14 flex-row items-start justify-around">
+      <header className="w-800px flex h-14 flex-row items-start justify-around p-16">
         <div>
           <h1>Users</h1>
           <h2>There are {userList.length} users</h2>
@@ -30,7 +30,7 @@ const UserList = () => {
           </Button>
         </div>
       </header>
-      <div className="mt-16 grid place-items-center">
+      <div className="m-auto mt-16 h-2/3 w-[65%] overflow-y-auto pr-2 sm:w-11/12">
         {userList.map((userData) => (
           <User userData={userData} key={userData.id} />
         ))}
