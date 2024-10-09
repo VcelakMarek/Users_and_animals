@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Form } from "react-final-form";
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
@@ -12,32 +12,44 @@ type AnimalFormProps = {
   animalId?: string;
 };
 
-const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
+const AnimalForm: FC<AnimalFormProps> = ({ formValues }) => {
   const navigate = useNavigate();
-  console.log(formValues, "VALUES");
+  const queryClient = useQueryClient();
 
-  const { mutate: addAnimalMutate } = useMutation({
+  const { mutateAsync: addAnimalMutate } = useMutation({
     mutationFn: addAnimal,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Animals"] });
+    },
   });
 
-  const { mutate: editAnimalMutate } = useMutation({
+  const { mutateAsync: editAnimalMutate } = useMutation({
     mutationFn: editAnimal,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Animals"] });
+    },
   });
 
   const onSubmit = async (values: Animal) => {
-    const newAnimal: Animal = {
+    const newAnimal = {
       ...values,
-      id: animalId ?? "",
-      type: values.type ?? "cat",
+
+      age: Number(values.age),
     };
-    console.log("values:", values);
 
-    if (formValues) editAnimalMutate(values);
-    else addAnimalMutate(newAnimal);
-
-    navigate(-1);
-
-    //confirm add/edit
+    try {
+      if (formValues) {
+        await editAnimalMutate({
+          ...values,
+          age: Number(values.age),
+        });
+      } else {
+        await addAnimalMutate(newAnimal);
+      }
+      navigate(-1);
+    } catch (error) {
+      console.error("Error during mutation:", error);
+    }
   };
 
   return (
@@ -59,7 +71,12 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
                     inputName="Type"
                     size="small"
                     inputType="select"
-                    selectValues={["Cat", "Dog", "Others"]}
+                    initialValue={formValues?.type ?? "cat"}
+                    selectValues={[
+                      { value: "cat", label: "Cat" },
+                      { value: "dog", label: "Dog" },
+                      { value: "other", label: "Other" },
+                    ]}
                   />
 
                   <FormInput
@@ -67,6 +84,7 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues, animalId }) => {
                     inputName="Age"
                     size="small"
                     inputType="number"
+                    minValue={0}
                   />
                 </div>
                 <div>

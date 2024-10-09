@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Form } from "react-final-form";
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
@@ -12,33 +12,43 @@ type UserFormProps = {
   userId?: string;
 };
 
-const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
+const UserForm: FC<UserFormProps> = ({ formValues }) => {
   const navigate = useNavigate();
-  console.log(formValues, "VALUES");
+  const queryClient = useQueryClient();
 
-  const { mutate: addUserMutate } = useMutation({
+  const { mutateAsync: addUserMutate } = useMutation({
     mutationFn: addUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Users"] });
+    },
   });
 
-  const { mutate: editUserMutate } = useMutation({
+  const { mutateAsync: editUserMutate } = useMutation({
     mutationFn: editUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Users"] });
+    },
   });
 
   const onSubmit = async (values: User) => {
     const newUser: User = {
       ...values,
-      id: userId ?? "",
-      gender: values.gender ?? "female",
-      banned: values.banned ?? false,
+      banned: String(values.banned) === "true" ? true : false,
     };
-    console.log("values:", values);
 
-    if (formValues) editUserMutate(values);
-    else addUserMutate(newUser);
-
-    navigate(-1);
-
-    //confirm add/edit
+    try {
+      if (formValues) {
+        await editUserMutate({
+          ...values,
+          banned: String(values.banned) === "true" ? true : false,
+        });
+      } else {
+        await addUserMutate(newUser);
+      }
+      navigate(-1);
+    } catch (error) {
+      console.error("Error during mutation:", error);
+    }
   };
 
   return (
@@ -60,7 +70,12 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                     inputName="Gender"
                     size="small"
                     inputType="select"
-                    selectValues={["female", "male", "other"]}
+                    initialValue={formValues?.gender ?? "female"}
+                    selectValues={[
+                      { value: "female", label: "Female" },
+                      { value: "male", label: "Male" },
+                      { value: "other", label: "Other" },
+                    ]}
                   />
 
                   <FormInput
@@ -68,7 +83,11 @@ const UserForm: FC<UserFormProps> = ({ formValues, userId }) => {
                     inputName="Banned"
                     size="small"
                     inputType="select"
-                    selectValues={["false", "true"]}
+                    initialValue={String(formValues?.banned ?? "false")}
+                    selectValues={[
+                      { value: "false", label: "Allowed" },
+                      { value: "true", label: "Banned" },
+                    ]}
                   />
                 </div>
                 <div>
