@@ -1,12 +1,12 @@
+import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
 
 const root = resolve(__dirname, "src");
 
 // prettier-ignore
 export default defineConfig({
-  base: "/Users_and_animals/",
+  base: "/",
   plugins: [react()],
   root: "src",
   resolve: {

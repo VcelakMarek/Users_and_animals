@@ -25,25 +25,13 @@ const App = () => {
       <BrowserRouter>
         <div className="h-screen bg-light-bg">
           <Routes>
-            <Route path="/Users_and_animals/" element={<UsersAndAnimals />} />
-            <Route path="/Users_and_animals/users/" element={<UserList />} />
-            <Route path="/Users_and_animals/users/new" element={<UserForm />} />
-            <Route
-              path="/Users_and_animals/users/edit/:id"
-              element={<EditUser />}
-            />
-            <Route
-              path="/Users_and_animals/animals/"
-              element={<AnimalList />}
-            />
-            <Route
-              path="/Users_and_animals/animals/new"
-              element={<AnimalForm />}
-            />
-            <Route
-              path="/Users_and_animals/animals/edit/:id"
-              element={<EditAnimal />}
-            />
+            <Route path="/" element={<UsersAndAnimals />} />
+            <Route path="/users/" element={<UserList />} />
+            <Route path="/users/new" element={<UserForm />} />
+            <Route path="/users/edit/:id" element={<EditUser />} />
+            <Route path="/animals/" element={<AnimalList />} />
+            <Route path="/animals/new" element={<AnimalForm />} />
+            <Route path="/animals/edit/:id" element={<EditAnimal />} />
           </Routes>
         </div>
       </BrowserRouter>
