@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET, POST, PUT, DELETE } from "connectors/fetch";
-import type { User } from "types/UserType";
+import { AxiosResponse } from "axios";
+import { GET, POST, PATCH, DELETE } from "connectors/fetch";
+import type { User, UserNoId } from "types/UserType";
 
-const url = "/users";
+const URL = "/users";
 
 export const getUsers = () => {
   const {
@@ -12,7 +13,7 @@ export const getUsers = () => {
     error,
   } = useQuery({
     queryKey: ["Users"],
-    queryFn: () => GET<User[]>(url),
+    queryFn: () => GET<User[]>(URL),
   });
 
   const userList = response ? response.data : null;
@@ -29,7 +30,7 @@ export const getUser = (id: string) => {
     error,
   } = useQuery({
     queryKey: ["User"],
-    queryFn: () => GET<User>(`${url}/${id}`),
+    queryFn: () => GET<User>(`${URL}/${id}`),
     staleTime: 0, // Disable caching (always considered stale)
     refetchOnWindowFocus: false, // Avoid refetching when window regains focus
   });
@@ -39,14 +40,16 @@ export const getUser = (id: string) => {
   return { userData, isFetching, isLoading, refetch, error };
 };
 
-export const editUser = (userData: User) => {
-  PUT(`${url}/${userData.id}`, userData);
+export const editUser = (userData: User): Promise<AxiosResponse<User>> => {
+  return PATCH<User>(`${URL}/${userData.id}`, userData);
 };
 
-export const addUser = (userData: User) => {
-  POST(url, userData);
+export const addUser = (
+  userData: UserNoId,
+): Promise<AxiosResponse<UserNoId>> => {
+  return POST<UserNoId>(URL, userData);
 };
 
-export const deleteUser = (id: string) => {
-  DELETE(`${url}/${id}`);
+export const deleteUser = (id: string): Promise<AxiosResponse<void>> => {
+  return DELETE(`${URL}/${id}`);
 };
