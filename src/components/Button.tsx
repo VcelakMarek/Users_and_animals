@@ -1,19 +1,15 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type Props = {
   color?: "red" | "purple" | "grey" | "transparent";
   children?: ReactNode;
-  isDropdown?: boolean;
-  DropDownMenu?: ReactNode;
   canGoBack?: boolean;
   hasIcon?: boolean;
-  isOpen?: boolean;
   full?: boolean;
   invisible?: boolean;
   link?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
-// ☝🏻 Contains all the attributes of a button element (onClick, type,...)
 
 const backgroundColor = {
   red: "bg-red hover:bg-red-hover",
@@ -32,18 +28,15 @@ const textColor = {
 
 const Button = ({
   color = "transparent",
-  isDropdown,
   canGoBack,
   children,
   hasIcon,
-  isOpen,
   full,
   invisible,
   link,
-  className,
   ...rest
 }: Props) => {
-  const border = !isDropdown && "rounded-full";
+  const border = "rounded-full";
   const dimensions = !hasIcon
     ? `h-12 pl-6 pr-6 ${full ? "w-full" : null}`
     : " pl-5 pb-2";
@@ -59,21 +52,7 @@ const Button = ({
     invisible ? "invisible" : null,
   ];
 
-  const dropDownClasses = [text, flex];
   const linkClasses = baseClasses.concat(flex);
-
-  if (isDropdown) {
-    return (
-      <button {...rest} className={dropDownClasses.join(" ")}>
-        {children}
-        <img
-          className={isOpen ? "rotate-180 duration-500" : "duration-500"}
-          src="/todo_app/assets/icon-arrow-down.svg"
-          alt="arrow-down"
-        />
-      </button>
-    );
-  }
 
   if (canGoBack) {
     return (
