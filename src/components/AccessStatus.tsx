@@ -1,10 +1,6 @@
-type AccessStatusTypes = {
-  [key: string]: string[];
-};
-
-const accessStatus: AccessStatusTypes = {
-  Allowed: ["bg-[#33D69F]", "text-[#33D69F]"],
-  Banned: ["bg-[#D53333]", "text-[#D53333]"],
+const accessStatus = {
+  allowed: ["bg-[#33D69F]", "text-[#33D69F]"],
+  banned: ["bg-[#D53333]", "text-[#D53333]"],
 };
 
 type Props = {
@@ -12,7 +8,7 @@ type Props = {
 };
 
 const AccessStatus = ({ isBanned }: Props) => {
-  const status = isBanned ? "Banned" : "Allowed";
+  const status = isBanned ? "banned" : "allowed";
   const color = accessStatus[status];
 
   return (
