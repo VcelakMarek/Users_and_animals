@@ -4,7 +4,6 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 type Props = {
   color?: "red" | "purple" | "grey" | "transparent";
   children?: ReactNode;
-  canGoBack?: boolean;
   hasIcon?: boolean;
   full?: boolean;
   invisible?: boolean;
@@ -27,27 +26,34 @@ const textColor = {
   transparent: "",
 };
 
+const disabledStyles = {
+  red: "bg-red opacity-50 cursor-not-allowed",
+  purple: "bg-purple opacity-50 cursor-not-allowed",
+  grey: "bg-[#e6e8f5] opacity-50 cursor-not-allowed",
+  transparent: "opacity-50 cursor-not-allowed",
+};
+
 const Button = ({
   color = "transparent",
-  canGoBack,
   children,
   hasIcon,
   full,
   invisible,
   link,
   hasNoStyle,
+  disabled,
   ...rest
 }: Props) => {
   const border = "rounded-full";
   const dimensions = !hasIcon
     ? `h-12 pl-6 pr-6 ${full ? "w-full" : null}`
-    : " pl-5 pb-2";
+    : "pl-5 pb-2";
   const text = "font-bold text-xs tracking-[1px]";
-  const flex = "flex items-center gap-4 ";
+  const flex = "flex items-center gap-4";
 
   let baseClasses = [
-    backgroundColor[color],
-    textColor[color],
+    disabled ? disabledStyles[color] : backgroundColor[color],
+    disabled ? "" : textColor[color],
     border,
     dimensions,
     text,
@@ -58,14 +64,6 @@ const Button = ({
 
   const linkClasses = baseClasses.concat(flex);
 
-  if (canGoBack) {
-    return (
-      <button {...rest} className="mb-6 flex justify-between gap-5">
-        <h3 className="mt-0.5 hover:text-grey">Go back</h3>
-      </button>
-    );
-  }
-
   if (link) {
     return (
       <Link to={link} className={linkClasses.join(" ")}>
@@ -75,7 +73,7 @@ const Button = ({
   }
 
   return (
-    <button {...rest} className={baseClasses.join(" ")}>
+    <button {...rest} className={baseClasses.join(" ")} disabled={disabled}>
       {children}
     </button>
   );
