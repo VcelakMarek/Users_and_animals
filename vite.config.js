@@ -6,7 +6,7 @@ const root = resolve(__dirname, "src");
 
 // prettier-ignore
 export default defineConfig({
-  base: "/",
+  base: "/Users_and_animals/",
   plugins: [react()],
   root: "src",
   resolve: {

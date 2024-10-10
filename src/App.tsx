@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/Users_and_animals/">
         <div className="h-screen bg-light-bg">
           <Routes>
             <Route path="/" element={<Menu />} />
