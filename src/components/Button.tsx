@@ -9,6 +9,7 @@ type Props = {
   full?: boolean;
   invisible?: boolean;
   link?: string;
+  hasNoStyle?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const backgroundColor = {
@@ -34,6 +35,7 @@ const Button = ({
   full,
   invisible,
   link,
+  hasNoStyle,
   ...rest
 }: Props) => {
   const border = "rounded-full";
@@ -43,7 +45,7 @@ const Button = ({
   const text = "font-bold text-xs tracking-[1px]";
   const flex = "flex items-center gap-4 ";
 
-  const baseClasses = [
+  let baseClasses = [
     backgroundColor[color],
     textColor[color],
     border,
@@ -51,6 +53,8 @@ const Button = ({
     text,
     invisible ? "invisible" : null,
   ];
+
+  if (hasNoStyle) baseClasses = [];
 
   const linkClasses = baseClasses.concat(flex);
 
