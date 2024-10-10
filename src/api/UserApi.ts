@@ -6,38 +6,21 @@ import type { User, UserNoId } from "types/UserType";
 const URL = "/users";
 
 export const getUsers = () => {
-  const {
-    data: response,
-    isFetching,
-    refetch,
-    error,
-  } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["Users"],
     queryFn: () => GET<User[]>(URL),
   });
 
-  const userList = response ? response.data : null;
-
-  return { userList, isFetching, refetch, error };
+  return { userList: data?.data, isFetching, error };
 };
 
 export const getUser = (id: string) => {
-  const {
-    data: response,
-    isFetching,
-    isLoading,
-    refetch,
-    error,
-  } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["User"],
     queryFn: () => GET<User>(`${URL}/${id}`),
-    staleTime: 0, // Disable caching (always considered stale)
-    refetchOnWindowFocus: false, // Avoid refetching when window regains focus
   });
 
-  const userData = response ? response.data : null;
-
-  return { userData, isFetching, isLoading, refetch, error };
+  return { userData: data?.data, isFetching, error };
 };
 
 export const editUser = (userData: User): Promise<AxiosResponse<User>> => {

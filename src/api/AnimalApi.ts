@@ -6,37 +6,21 @@ import type { Animal, AnimalNoId } from "types/AnimalType";
 const URL = "/animals";
 
 export const getAnimals = () => {
-  const {
-    data: response,
-    isFetching,
-    refetch,
-    error,
-  } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["Animals"],
     queryFn: () => GET<Animal[]>(URL),
   });
 
-  const animalList = response ? response.data : null;
-
-  return { animalList, isFetching, refetch, error };
+  return { animalList: data?.data, isFetching, error };
 };
 
 export const getAnimal = (id: string) => {
-  const {
-    data: response,
-    isFetching,
-    refetch,
-    error,
-  } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["Animal"],
     queryFn: () => GET<Animal>(`${URL}/${id}`),
-    staleTime: 0, // Disable caching (always considered stale)
-    refetchOnWindowFocus: false, // Avoid refetching when window regains focus
   });
 
-  const animalData = response ? response.data : null;
-
-  return { animalData, isFetching, refetch, error };
+  return { animalData: data?.data, isFetching, error };
 };
 
 export const editAnimal = (
