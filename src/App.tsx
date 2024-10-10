@@ -9,6 +9,7 @@ import EditUser from "components/EditUser";
 import EditAnimal from "components/EditAnimal";
 import UserForm from "components/UserForm";
 import AnimalForm from "components/AnimalForm";
+import NotFound from "components/NotFound";
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/animals/" element={<AnimalList />} />
             <Route path="/animals/new" element={<AnimalForm />} />
             <Route path="/animals/edit/:id" element={<EditAnimal />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </BrowserRouter>
