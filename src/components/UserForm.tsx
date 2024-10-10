@@ -4,6 +4,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
+import { validateUser } from "components/userValidation";
 import { addUser, editUser } from "api/UserApi";
 import type { User } from "types/UserType";
 
@@ -59,7 +60,13 @@ const UserForm: FC<UserFormProps> = ({ formValues }) => {
         className="w-screen"
         onSubmit={onSubmit}
         initialValues={formValues ?? null}
-        render={({ handleSubmit }) => (
+        validate={validateUser}
+        render={({
+          handleSubmit,
+          submitting,
+          pristine,
+          hasValidationErrors,
+        }) => (
           <form onSubmit={handleSubmit}>
             <main className="bg-white-background flex h-screen w-screen flex-wrap pt-10">
               <section className="mx-auto flex flex-col gap-1">
@@ -91,7 +98,11 @@ const UserForm: FC<UserFormProps> = ({ formValues }) => {
                   />
                 </div>
                 <div>
-                  <Button type="submit" color="purple">
+                  <Button
+                    type="submit"
+                    color="purple"
+                    disabled={submitting || pristine || hasValidationErrors}
+                  >
                     {formValues ? "Save changes" : "Add User"}
                   </Button>
                 </div>

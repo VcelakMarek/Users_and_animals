@@ -4,6 +4,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
+import { validateAnimal } from "components/animalValidation";
 import { addAnimal, editAnimal } from "api/AnimalApi";
 import type { Animal } from "types/AnimalType";
 
@@ -60,7 +61,13 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues }) => {
         className="w-screen"
         onSubmit={onSubmit}
         initialValues={formValues ?? null}
-        render={({ handleSubmit }) => (
+        validate={validateAnimal}
+        render={({
+          handleSubmit,
+          submitting,
+          pristine,
+          hasValidationErrors,
+        }) => (
           <form onSubmit={handleSubmit}>
             <main className="bg-white-background flex h-screen w-screen flex-wrap pt-10">
               <section className="mx-auto flex flex-col gap-1">
@@ -88,7 +95,11 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues }) => {
                   />
                 </div>
                 <div>
-                  <Button type="submit" color="purple">
+                  <Button
+                    type="submit"
+                    color="purple"
+                    disabled={submitting || pristine || hasValidationErrors}
+                  >
                     {formValues ? "Save changes" : "Add Animal"}
                   </Button>
                 </div>
