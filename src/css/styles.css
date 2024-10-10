@@ -20,11 +20,18 @@ h6 {
 }
 
 input[type="text"],
-[type="date"],
-[type="email"],
-[type="number"],
+input[type="number"],
 select {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  appearance: none;
   @apply mb-5 mt-2.5 h-12 rounded-md border border-light-grey px-5 text-sm font-bold text-black outline-purple active:border-purple;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 *::-webkit-scrollbar {
