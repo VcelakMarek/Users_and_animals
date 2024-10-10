@@ -16,7 +16,7 @@ export const getUsers = () => {
 
 export const getUser = (id: string) => {
   const { data, isFetching, error } = useQuery({
-    queryKey: ["User"],
+    queryKey: ["User", id],
     queryFn: () => GET<User>(`${URL}/${id}`),
   });
 

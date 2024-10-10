@@ -16,7 +16,7 @@ export const getAnimals = () => {
 
 export const getAnimal = (id: string) => {
   const { data, isFetching, error } = useQuery({
-    queryKey: ["Animal"],
+    queryKey: ["Animal", id],
     queryFn: () => GET<Animal>(`${URL}/${id}`),
   });
 
