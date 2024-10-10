@@ -16,6 +16,7 @@ type Props = {
   selectValues?: Option[];
   minValue?: number;
   initialValue?: string;
+  validate?: (value: string) => string;
 };
 
 const inputSize: { [key in Size]: string } = {
@@ -32,6 +33,7 @@ const FormInput = ({
   selectValues,
   minValue,
   initialValue,
+  validate,
 }: Props) => {
   if (inputType === "select") {
     return (
@@ -56,22 +58,29 @@ const FormInput = ({
 
   return (
     <label htmlFor={id}>
-      <Field name={id}>
-        {({ input }) => (
-          <div>
+      <Field name={id} validate={validate}>
+        {({ input, meta }) => (
+          <div className="flex flex-col">
             <div className="flex justify-between">
               <h2>{inputName}</h2>
             </div>
-            <input
-              {...input}
-              type={inputType}
-              min={minValue}
-              className={`${inputSize[size]} `}
-              placeholder={inputPlaceholder}
-              onChange={(e) => {
-                input.onChange(e); //final-form's onChange
-              }}
-            />
+            <div className="relative">
+              <input
+                {...input}
+                type={inputType}
+                min={minValue}
+                className={`${inputSize[size]}`}
+                placeholder={inputPlaceholder}
+                onChange={(e) => {
+                  input.onChange(e);
+                }}
+              />
+              {meta.error && meta.touched && typeof meta.error === "string" && (
+                <span className="absolute right-3 top-[33px] -translate-y-1/2 transform text-sm text-red">
+                  {meta.error}
+                </span>
+              )}
+            </div>
           </div>
         )}
       </Field>
