@@ -1,7 +1,9 @@
+export type Gender = "female" | "male" | "other";
+
 export type User = {
   id: string;
   name: string;
-  gender: "female" | "male" | "other";
+  gender: Gender;
   banned: boolean;
 };
 
