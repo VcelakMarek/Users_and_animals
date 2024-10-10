@@ -4,6 +4,7 @@ import orderBy from "lodash/orderBy";
 import Animal from "components/Animal";
 import Button from "components/Button";
 import Loading from "components/Loading";
+import Navigation from "components/Navigation";
 import { getAnimals } from "api/AnimalApi";
 import type { AnimalNoId } from "types/AnimalType";
 
@@ -82,7 +83,8 @@ const AnimalList = () => {
 
   return (
     <>
-      <header className="m-auto flex h-14 w-4/6 flex-row items-center justify-between py-16 md:w-5/6">
+      <Navigation />
+      <header className="m-auto flex h-14 w-4/6 flex-row items-center justify-between py-14 md:w-5/6">
         <div>
           <h1>Animals</h1>
           <h2>There are {animalList.length} animals</h2>

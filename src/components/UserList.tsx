@@ -5,6 +5,7 @@ import { getUsers } from "api/UserApi";
 import User from "components/User";
 import Button from "components/Button";
 import Loading from "components/Loading";
+import Navigation from "components/Navigation";
 import type { UserNoId } from "types/UserType";
 
 const UserList = () => {
@@ -78,7 +79,8 @@ const UserList = () => {
 
   return (
     <>
-      <header className="m-auto flex h-14 w-4/6 flex-row items-center justify-between py-16 md:w-5/6">
+      <Navigation />
+      <header className="m-auto flex h-14 w-4/6 flex-row items-center justify-between py-14 md:w-5/6">
         <div>
           <h1>Users</h1>
           <h2>There are {userList.length} users</h2>

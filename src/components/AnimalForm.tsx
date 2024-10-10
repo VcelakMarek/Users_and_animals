@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "components/FormInput";
 import Button from "components/Button";
 import { validateAnimal } from "components/animalValidation";
+import Navigation from "components/Navigation";
 import { addAnimal, editAnimal } from "api/AnimalApi";
 import type { Animal } from "types/AnimalType";
 
@@ -34,7 +35,6 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues }) => {
   const onSubmit = async (values: Animal) => {
     const newAnimal = {
       ...values,
-
       age: Number(values.age),
     };
 
@@ -54,60 +54,63 @@ const AnimalForm: FC<AnimalFormProps> = ({ formValues }) => {
   };
 
   return (
-    <div className="bg-white-background grid h-screen w-screen place-items-center pt-10">
-      <h1>{formValues ? "Edit Animal" : "New Animal"}</h1>
-      <Form
-        id={formValues ? "editAnimal" : "newAnimal"}
-        className="w-screen"
-        onSubmit={onSubmit}
-        initialValues={formValues ?? null}
-        validate={validateAnimal}
-        render={({
-          handleSubmit,
-          submitting,
-          pristine,
-          hasValidationErrors,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <main className="bg-white-background flex h-screen w-screen flex-wrap pt-10">
-              <section className="mx-auto flex flex-col gap-1">
-                <FormInput inputName="Name" id="name" />
-                <div className="mb-16 flex flex-row justify-between">
-                  <FormInput
-                    id="type"
-                    inputName="Type"
-                    size="small"
-                    inputType="select"
-                    initialValue={formValues?.type ?? "cat"}
-                    selectValues={[
-                      { value: "cat", label: "Cat" },
-                      { value: "dog", label: "Dog" },
-                      { value: "other", label: "Other" },
-                    ]}
-                  />
+    <div className="bg-white-background h-screen w-screen">
+      <Navigation />
+      <div className="grid place-items-center pt-10">
+        <h1>{formValues ? "Edit Animal" : "New Animal"}</h1>
+        <Form
+          id={formValues ? "editAnimal" : "newAnimal"}
+          className="w-screen"
+          onSubmit={onSubmit}
+          initialValues={formValues ?? null}
+          validate={validateAnimal}
+          render={({
+            handleSubmit,
+            submitting,
+            pristine,
+            hasValidationErrors,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <main className="bg-white-background flex w-screen flex-wrap pt-10">
+                <section className="mx-auto flex flex-col gap-1">
+                  <FormInput inputName="Name" id="name" />
+                  <div className="mb-16 flex flex-row justify-between">
+                    <FormInput
+                      id="type"
+                      inputName="Type"
+                      size="small"
+                      inputType="select"
+                      initialValue={formValues?.type ?? "cat"}
+                      selectValues={[
+                        { value: "cat", label: "Cat" },
+                        { value: "dog", label: "Dog" },
+                        { value: "other", label: "Other" },
+                      ]}
+                    />
 
-                  <FormInput
-                    id="age"
-                    inputName="Age"
-                    size="small"
-                    inputType="number"
-                    minValue={0}
-                  />
-                </div>
-                <div>
-                  <Button
-                    type="submit"
-                    color="purple"
-                    disabled={submitting || pristine || hasValidationErrors}
-                  >
-                    {formValues ? "Save changes" : "Add Animal"}
-                  </Button>
-                </div>
-              </section>
-            </main>
-          </form>
-        )}
-      />
+                    <FormInput
+                      id="age"
+                      inputName="Age"
+                      size="small"
+                      inputType="number"
+                      minValue={0}
+                    />
+                  </div>
+                  <div>
+                    <Button
+                      type="submit"
+                      color="purple"
+                      disabled={submitting || pristine || hasValidationErrors}
+                    >
+                      {formValues ? "Save changes" : "Add Animal"}
+                    </Button>
+                  </div>
+                </section>
+              </main>
+            </form>
+          )}
+        />
+      </div>
     </div>
   );
 };
