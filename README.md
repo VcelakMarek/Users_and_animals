@@ -61,6 +61,9 @@ The goal of this project is to showcase proficiency in creating a web applicatio
 
 ## Deployment
 
+The project is deployed on [GitHub Pages](https://vcelakmarek.github.io/Users_and_animals/)
+
+
 To run the project locally, follow these steps:
 
 1. Clone the repository.
