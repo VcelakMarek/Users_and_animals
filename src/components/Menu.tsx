@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const UsersAndAnimals = () => {
+const Menu = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-light-bg p-6">
       <header className="mb-10">
@@ -25,4 +25,4 @@ const UsersAndAnimals = () => {
   );
 };
 
-export default UsersAndAnimals;
+export default Menu;

@@ -2,7 +2,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import UsersAndAnimals from "components/UsersAndAnimals";
+import Menu from "components/Menu";
 import UserList from "components/UserList";
 import AnimalList from "components/AnimalList";
 import EditUser from "components/EditUser";
@@ -26,7 +26,7 @@ const App = () => {
       <BrowserRouter>
         <div className="h-screen bg-light-bg">
           <Routes>
-            <Route path="/" element={<UsersAndAnimals />} />
+            <Route path="/" element={<Menu />} />
             <Route path="/users/" element={<UserList />} />
             <Route path="/users/new" element={<UserForm />} />
             <Route path="/users/edit/:id" element={<EditUser />} />
