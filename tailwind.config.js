@@ -11,7 +11,6 @@ export default {
         red: "var(--red)",
         "red-hover": "var(--red-hover)",
         "dark-blue": "var(--dark-blue)",
-        blue: "var(--blue)",
         "light-blue": "var(--light-blue)",
         "light-grey": "var(--light-grey)",
         grey: "var(--grey)",
@@ -20,7 +19,7 @@ export default {
         "light-bg": "var(--light-bg)",
       },
       screens: {
-        md: { max: "900px" },
+        md: { max: "950px" },
         sm: { max: "600px" },
       },
     },
