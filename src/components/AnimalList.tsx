@@ -3,6 +3,7 @@ import debounce from "lodash/debounce";
 import orderBy from "lodash/orderBy";
 import Animal from "components/Animal";
 import Button from "components/Button";
+import Loading from "components/Loading";
 import { getAnimals } from "api/AnimalApi";
 import type { AnimalNoId } from "types/AnimalType";
 
@@ -43,11 +44,7 @@ const AnimalList = () => {
   }, [query]);
 
   if (isFetching) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <Loading />;
   }
 
   if (error) {

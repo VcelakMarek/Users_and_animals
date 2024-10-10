@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import debounce from "lodash/debounce";
 import orderBy from "lodash/orderBy";
+import { getUsers } from "api/UserApi";
 import User from "components/User";
 import Button from "components/Button";
-import { getUsers } from "api/UserApi";
+import Loading from "components/Loading";
 import type { UserNoId } from "types/UserType";
 
 const UserList = () => {
@@ -43,11 +44,7 @@ const UserList = () => {
   }, [query]);
 
   if (isFetching) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <Loading />;
   }
 
   if (error) {
