@@ -2,31 +2,25 @@ import { Link } from "react-router-dom";
 
 const UsersAndAnimals = () => {
   return (
-    <div className="h-screen bg-light-bg">
-      <div className="flex w-screen bg-light-bg">
-        <main className="flex w-screen flex-col">
-          <header className="w-800px mt-16 flex h-14 flex-row items-start justify-around">
-            <div>
-              <h1>Menu</h1>
-            </div>
-          </header>
-          <div className="mt-16 flex flex-col items-center justify-center gap-4">
-            <Link
-              to="users"
-              className="flex h-20 w-2/3 items-center justify-center rounded-lg border-[1.5px] border-transparent bg-white px-[2%] text-center drop-shadow hover:border-[1.5px] hover:border-[#7C5DFA] sm:w-11/12"
-            >
-              Users
-            </Link>
+    <div className="flex h-screen flex-col items-center justify-center bg-light-bg p-6">
+      <header className="mb-10">
+        <h1>Menu</h1>
+      </header>
+      <main className="flex w-full max-w-md flex-col items-center justify-center space-y-6">
+        <Link
+          to="users"
+          className="flex h-16 w-full transform items-center justify-center rounded-lg border-2 border-transparent bg-white text-lg font-semibold text-gray-800 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:border-[#7C5DFA] hover:bg-[#F3F4F6] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#7C5DFA] focus:ring-opacity-50"
+        >
+          Users
+        </Link>
 
-            <Link
-              to="animals"
-              className="flex h-20 w-2/3 items-center justify-center rounded-lg border-[1.5px] border-transparent bg-white px-[2%] text-center drop-shadow hover:border-[1.5px] hover:border-[#7C5DFA] sm:w-11/12"
-            >
-              Animals
-            </Link>
-          </div>
-        </main>
-      </div>
+        <Link
+          to="animals"
+          className="flex h-16 w-full transform items-center justify-center rounded-lg border-2 border-transparent bg-white text-lg font-semibold text-gray-800 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:border-[#7C5DFA] hover:bg-[#F3F4F6] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#7C5DFA] focus:ring-opacity-50"
+        >
+          Animals
+        </Link>
+      </main>
     </div>
   );
 };
