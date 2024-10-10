@@ -19,8 +19,8 @@ type Props = {
 };
 
 const inputSize: { [key in Size]: string } = {
-  small: "w-[240px]",
-  large: "md:w-[250px] w-[504px]",
+  small: "sm:w-[140px] w-[240px]",
+  large: "sm:w-[300px] w-[504px]",
 };
 
 const FormInput = ({
