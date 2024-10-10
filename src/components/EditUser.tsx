@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import UserForm from "components/UserForm";
 import { getUser } from "api/UserApi";
+import UserForm from "components/UserForm";
+import Loading from "components/Loading";
 
 const EditUser = () => {
   const { id } = useParams();
@@ -9,20 +10,27 @@ const EditUser = () => {
     return <div>Invalid User ID</div>;
   }
 
-  const { userData, isFetching } = getUser(id);
+  const { userData, isFetching, error } = getUser(id);
 
   if (isFetching) {
+    return <Loading />;
+  }
+
+  if (error) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="h-20 w-20 animate-spin rounded-full border-8 border-gray-300 border-t-purple" />
+        Error occured: {error.message}
       </div>
     );
   }
 
   if (!userData) {
-    return <p>User doesn&apos;t exist</p>;
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p>Users doesn&apos;t exist</p>;
+      </div>
+    );
   }
-  //error handling
 
   return <UserForm formValues={userData} userId={id} />;
 };
