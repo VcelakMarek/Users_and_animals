@@ -41,7 +41,7 @@ The goal of this project is to showcase proficiency in creating a web applicatio
 
 ### Screenshot
 
-![Users and animals screenshot](./public/screenshot.jpg)
+![Users and animals screenshot](./src/public/screenshot.jpg)
 
 ## My Process
 
